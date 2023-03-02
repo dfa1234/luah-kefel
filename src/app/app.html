@@ -1,0 +1,35 @@
+<h1 class="title">{{ title }}</h1>
+
+<div class="tab">
+  <div class="wrap">
+    <div class="line-calc" *ngIf="hasStarted">
+      <b>{{ first }} x {{ second }}</b> =
+      <input
+        class="input-res"
+        type="number"
+        [(ngModel)]="result"
+        (click)="selectAll($event)"
+        (keydown.enter)="onValidate()"
+      />
+    </div>
+
+    <div class="commands">
+      <a (click)="createNew()" href="#">{{ newBtn }}</a>
+      <button
+        (click)="onValidate()"
+        *ngIf="hasStarted"
+        [disabled]="result === 0"
+      >
+        {{ validate }}
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="line-calc"
+    *ngIf="hasResponded"
+    [style.color]="isCorrect ? 'green' : 'red'"
+  >
+    {{ isCorrect ? yes : no }}
+  </div>
+</div>
